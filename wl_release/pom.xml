@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>wl_release</groupId>
+	<artifactId>com.may.xy</artifactId>
+	<packaging>war</packaging>
+	<version>1.0-SNAPSHOT</version>
+
+	<properties>
+		<file_encoding>UTF-8</file_encoding>
+		<compiler.version>1.8</compiler.version>
+		<java.source.version>1.8</java.source.version>
+		<java.target.version>1.8</java.target.version>
+	</properties>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.7.RELEASE</version>
+	</parent>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.16.18</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.6</version>
+		</dependency>
+
+
+	</dependencies>
+<build>
+	<plugins>
+
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<configuration>
+				<compilerVersion>${compiler.version}</compilerVersion>
+				<source>${java.source.version}</source>
+				<target>${java.target.version}</target>
+				<encoding>${file_encoding}</encoding>
+			</configuration>
+		</plugin>
+
+		<!--https://afoo.me/posts/2014-10-22-lombok-maven-and-intellij.html-->
+		<plugin>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok-maven-plugin</artifactId>
+			<version>1.16.18.1</version>
+			<configuration>
+				<encoding>${file_encoding}</encoding>
+			</configuration>
+			<executions>
+				<execution>
+					<phase>generate-sources</phase>
+					<goals>
+						<goal>delombok</goal>
+					</goals>
+				</execution>
+			</executions>
+		</plugin>
+	</plugins>
+</build>
+</project>
