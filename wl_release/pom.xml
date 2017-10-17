@@ -4,8 +4,8 @@
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>wl_release</groupId>
-	<artifactId>com.may.xy</artifactId>
+	<groupId>com.may.xy</groupId>
+	<artifactId>wl_release</artifactId>
 	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
 
@@ -30,6 +30,13 @@
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 
+		<!-- marked the embedded servlet container as provided -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -46,37 +53,57 @@
 
 
 	</dependencies>
-<build>
-	<plugins>
+	<build>
+		<plugins>
 
-		<plugin>
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-compiler-plugin</artifactId>
-			<configuration>
-				<compilerVersion>${compiler.version}</compilerVersion>
-				<source>${java.source.version}</source>
-				<target>${java.target.version}</target>
-				<encoding>${file_encoding}</encoding>
-			</configuration>
-		</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<compilerVersion>${compiler.version}</compilerVersion>
+					<source>${java.source.version}</source>
+					<target>${java.target.version}</target>
+					<encoding>${file_encoding}</encoding>
+				</configuration>
+			</plugin>
 
-		<!--https://afoo.me/posts/2014-10-22-lombok-maven-and-intellij.html-->
-		<plugin>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok-maven-plugin</artifactId>
-			<version>1.16.18.1</version>
-			<configuration>
-				<encoding>${file_encoding}</encoding>
-			</configuration>
-			<executions>
-				<execution>
-					<phase>generate-sources</phase>
-					<goals>
-						<goal>delombok</goal>
-					</goals>
-				</execution>
-			</executions>
-		</plugin>
-	</plugins>
-</build>
+			<!--https://afoo.me/posts/2014-10-22-lombok-maven-and-intellij.html-->
+			<plugin>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok-maven-plugin</artifactId>
+				<version>1.16.18.1</version>
+				<configuration>
+					<encoding>${file_encoding}</encoding>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>delombok</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Package as an executable jar/war -->
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+		</plugins>
+
+	</build>
+
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<activeprofile>dev</activeprofile>
+			</properties>
+		</profile>
+	</profiles>
 </project>

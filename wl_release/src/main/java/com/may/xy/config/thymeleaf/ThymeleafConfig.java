@@ -11,6 +11,8 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -28,6 +30,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  */
 @Configuration
 @EnableConfigurationProperties(ThymeleafConfigProperties.class)
+@AutoConfigureAfter({WebMvcAutoConfiguration.class})
 public class ThymeleafConfig extends WebMvcConfigurerAdapter implements ApplicationContextAware {
 	@Autowired(required = false)
 	private ApplicationContext applicationContext;
@@ -35,8 +38,8 @@ public class ThymeleafConfig extends WebMvcConfigurerAdapter implements Applicat
 	@Autowired
 	private ThymeleafConfigProperties thymeleafConfigProperties;
 
-	//private static String prefix = "/WEB-INF/templates/";
-	private static String prefix = "classpath:/templates/";
+	private static String prefix = "/WEB-INF/templates/";
+	//private static String prefix = "classpath:/templates/";
 
 	private static String suffix = ".html";
 
