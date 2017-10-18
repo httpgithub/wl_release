@@ -6,8 +6,11 @@
 
 	<groupId>com.may.xy</groupId>
 	<artifactId>wl_release</artifactId>
-	<packaging>war</packaging>
+	<packaging>pom</packaging>
 	<version>1.0-SNAPSHOT</version>
+	<modules>
+		<module>../wl_frontend</module>
+	</modules>
 
 	<properties>
 		<file_encoding>UTF-8</file_encoding>
